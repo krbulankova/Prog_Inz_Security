@@ -20,7 +20,6 @@ public class ProductController {
 	
 	@Autowired
 	IProductService prodService;
-	
 		
 	@GetMapping("/showAllProducts") // url address->localhost:8080/product/showAllProducts
 	public String getShowAllProducts(Model model) {
@@ -33,6 +32,12 @@ public class ProductController {
 	public String getSaveTestingData()
 	{
 		prodService.saveTestingData();
+		return "hello-page";// it is a html page -> hello-page.html
+	}
+	
+	@GetMapping("/gitTest")
+	public String getGitTest()
+	{
 		return "hello-page";//hello-page.html
 	}
 	
