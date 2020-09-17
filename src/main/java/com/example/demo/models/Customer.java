@@ -39,17 +39,6 @@ public class Customer {
 	private Collection<Product> allCustomerProducts;
 	
 	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
 	public Customer()
 	{
 		
