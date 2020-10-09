@@ -1,6 +1,5 @@
 package com.example.demo.models;
 
-import javax.annotation.Generated;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -17,8 +16,14 @@ import javax.validation.constraints.Size;
 import org.hibernate.annotations.ManyToAny;
 
 import com.example.demo.models.enums.ProductType;
+import com.sun.istack.NotNull;
 
-@Entity
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+import lombok.ToString;
+
+@Entity  @Getter @Setter @NoArgsConstructor @ToString
 @Table(name="ProductTable")
 public class Product {
 	//1.variables
@@ -33,6 +38,7 @@ public class Product {
 	@Max(1000)
 	private float price;
 	
+	@NotNull
 	@Column(name="ProdType")
 	private ProductType type;
 	
@@ -47,28 +53,13 @@ public class Product {
 	@JoinColumn(name="Cid")//link to Cid column not variable
 	private Customer customer;
 	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-		
-	//2.constructors
-	//no-argument constructor
-	public Product()
-	{
-		
-	}
 	public Product(String title, float price, ProductType type) {
 		this.title = title;
-		this.price = price;
-		this.type  = type;
+		if(price>=0)
+			this.price = price;
+		else
+			this.price = 0;
+		this.type = (type!=null)? type : ProductType.OtherType;
 	}
 	
 	
@@ -83,41 +74,6 @@ public class Product {
 		this.type = type;
 		this.customer = customer;
 	}
-	public String getTitle() {
-		return title;
-	}
-	public Customer getCustomer() {
-		return customer;
-	}
-	public void setCustomer(Customer customer) {
-		this.customer = customer;
-	}
-	public int getId() {
-		return id;
-	}
-	public void setTitle(String title) {
-		this.title = title;
-	}
-	public float getPrice() {
-		return price;
-	}
-	public void setPrice(float price) {
-		this.price = price;
-	}
 	
-	
-	
-	public ProductType getType() {
-		return type;
-	}
-	public void setType(ProductType type) {
-		this.type = type;
-	}
-	//4.toString
-	public String toString()
-	{
-		return id +"." +title + " " + price + " eur ," + type;
-		
-	}
 	
 }

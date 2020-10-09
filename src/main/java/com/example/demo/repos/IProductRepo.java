@@ -19,6 +19,7 @@ public interface IProductRepo extends CrudRepository<Product, Integer> {
 	
 	Product findByTitleAndPrice(String title, float price);
 	ArrayList<Product> findByCustomer(Customer customer);
+	Product findByTitleAndPriceAndType(String title, float price, ProductType type);
 	
 	
 }
