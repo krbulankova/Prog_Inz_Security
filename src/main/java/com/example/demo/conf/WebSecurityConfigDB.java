@@ -10,6 +10,8 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 
+import com.example.demo.services.impl.MyUserServiceImpl;
+
 @Configurable
 @EnableWebSecurity
 public class WebSecurityConfigDB extends WebSecurityConfigurerAdapter{
@@ -18,23 +20,9 @@ public class WebSecurityConfigDB extends WebSecurityConfigurerAdapter{
 	@Bean
 	@Override
 	protected UserDetailsService userDetailsService() {
-		UserDetails u1 = User.withDefaultPasswordEncoder()
-				.username("karina")
-				.password("123")
-				.roles("USER")
-				.build();
 		
-		
-		
-		UserDetails u2 = User.withDefaultPasswordEncoder()
-				.username("janis")
-				.password("321")
-				.roles("ADMIN")
-				.build();
-		
-		
-		InMemoryUserDetailsManager manager = new InMemoryUserDetailsManager(u1, u2);
-		return manager;
+		MyUserServiceImpl myUserDetailsManager = new MyUserServiceImpl();
+		return myUserDetailsManager;
 	}
 
 	@Override
@@ -43,9 +31,9 @@ public class WebSecurityConfigDB extends WebSecurityConfigurerAdapter{
 		http.authorizeRequests()
 		.antMatchers("/product/showAllProducts").permitAll()//anonymous
 		.antMatchers("/product/showAllProducts/**").anonymous()
-		.antMatchers("/product/insertOneProduct").hasAnyRole("ADMIN")
-		.antMatchers("/h2-console/**").hasAnyRole("ADMIN")
-		.antMatchers("/customer/buy/**").hasAnyRole("USER", "ADMIN")
+		.antMatchers("/product/insertOneProduct").hasAnyAuthority("ADMIN")
+		.antMatchers("/h2-console/**").hasAnyAuthority("ADMIN")//permitAll()
+		.antMatchers("/customer/buy/**").hasAnyAuthority("USER", "ADMIN")
 		.anyRequest().authenticated()
 		.and()
 		.formLogin().permitAll()

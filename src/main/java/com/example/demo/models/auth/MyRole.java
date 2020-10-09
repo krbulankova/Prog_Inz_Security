@@ -1,5 +1,6 @@
 package com.example.demo.models.auth;
 
+import java.util.ArrayList;
 import java.util.Collection;
 
 import javax.persistence.Column;
@@ -41,8 +42,12 @@ public class MyRole {
 	public MyRole(String title) {
 		super();
 		this.title = title;
+		this.allUsers = new ArrayList();
 	}
 	
-	
+	public void addNewUserToRole(MyUser myUser)
+	{
+		allUsers.add(myUser);
+	}
 
 }

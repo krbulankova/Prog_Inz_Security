@@ -23,7 +23,11 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 
-@Entity  @Getter @Setter @NoArgsConstructor @ToString
+@Entity 
+@Getter
+@Setter
+@NoArgsConstructor
+
 @Table(name="ProductTable")
 public class Product {
 	//1.variables

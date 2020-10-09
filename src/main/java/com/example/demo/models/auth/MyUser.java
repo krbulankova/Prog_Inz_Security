@@ -1,5 +1,6 @@
 package com.example.demo.models.auth;
 
+import java.util.ArrayList;
 import java.util.Collection;
 
 import javax.persistence.Column;
@@ -10,6 +11,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
+
+import org.hibernate.mapping.Array;
 
 import lombok.AccessLevel;
 import lombok.Getter;
@@ -47,7 +50,16 @@ public class MyUser {
 		this.allRoles = allRoles;
 	}
 
+	public MyUser(String password, String username) {
+		super();
+		this.password = password;
+		this.username = username;
+		this.allRoles = new ArrayList<>();
+	}
 	
-	
+	public void addNewRoleToUser(MyRole role) {
+		
+		allRoles.add(role);
+	}
 	
 }
